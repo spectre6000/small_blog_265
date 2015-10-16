@@ -1,6 +1,10 @@
 
 <h1>All authors</h1>
 
+<% if current_author.admin? %>
+  <p>ADMIN!</p>
+<% end %>
+
 <%= will_paginate %>
 
 <ul>
