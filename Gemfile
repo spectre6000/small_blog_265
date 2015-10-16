@@ -35,6 +35,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise',           '~> 3.5.2'
 gem 'devise_invitable', '~> 1.5.2'
 
+gem 'will_paginate'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
