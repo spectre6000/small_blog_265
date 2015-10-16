@@ -1,1 +1,12 @@
-<h1>AUTHORS INDEX</h1>
+
+<h1>All authors</h1>
+
+<%= will_paginate %>
+
+<ul>
+  <%@authors.each do | author | %>
+    <li><%= link_to author.username, author %></li>
+  <% end %>
+</ul>
+
+<%= will_paginate %>
