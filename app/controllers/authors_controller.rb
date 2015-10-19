@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
-  before_action :authenticate_author!
+  before_action :authenticate_author!, except: [ :index, :show ]
 
   def index
     @authors = Author.paginate( :page => params[ :page ] )
