@@ -9,4 +9,10 @@ class AuthorsController < ApplicationController
     @author = Author.find( params[ :id ] )
   end
 
+  def destroy
+    Author.find( params[ :id ] ).destroy
+    flash[ :success ] = "Author deleted."
+    redirect_to authors_url
+  end
+
 end

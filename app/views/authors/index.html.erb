@@ -1,8 +1,13 @@
-
 <h1 class="h1">All authors</h1>
 
-<% if current_author.admin? %>
-  <p>invite new users w/ email field &amp; button</p>
+<% if author_signed_in? %>
+  <%= link_to "sign out", destroy_author_session_path, method: :delete %>
+<% else %>
+  <%= link_to "sign in", new_author_session_path %>
+<% end %>
+
+<% if current_author && current_author.admin? %>
+  <%= link_to 'invite new author', new_author_invitation_path %>
 <% end %>
 
 <%= will_paginate %>
@@ -10,11 +15,12 @@
 <ul>
   <%@authors.each do | author | %>
     <div>
-      <span>author image</span>
+      <span>author profile image</span>
+      <span>author banner image</span>
       <span><%= link_to author.username, author %></span>
       <span><%= author.email %></span>
-      <% if current_author.admin? %>
-        <span>delete author | make admin</span>
+      <% if current_author && current_author.admin? %>
+        <span><%= link_to "delete", author, method: :delete, data: { confirm: "Are you sure?" } %> | make admin</span>
       <% end %>
     </div>
   <% end %>
