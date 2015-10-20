@@ -1,15 +1,22 @@
 
-<h1>All authors</h1>
+<h1 class="h1">All authors</h1>
 
 <% if current_author.admin? %>
-  <p>ADMIN!</p>
+  <p>invite new users w/ email field &amp; button</p>
 <% end %>
 
 <%= will_paginate %>
 
 <ul>
   <%@authors.each do | author | %>
-    <li><%= link_to author.username, author %></li>
+    <div>
+      <span>author image</span>
+      <span><%= link_to author.username, author %></span>
+      <span><%= author.email %></span>
+      <% if current_author.admin? %>
+        <span>delete author | make admin</span>
+      <% end %>
+    </div>
   <% end %>
 </ul>
 

@@ -3,4 +3,6 @@ class Author < ActiveRecord::Base
   # :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :lockable, :validatable
+
+  validates :username, :email, presence: true
 end

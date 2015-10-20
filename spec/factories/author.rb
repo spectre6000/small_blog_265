@@ -1,32 +1,42 @@
 FactoryGirl.define do
-  sequence :email do |n|
-    "author#{n}@example.com"
+  
+  sequence :username do | n |
+    "author#{ n }"
   end
+
+  sequence :email do | n |
+    "author#{ n }@example.com"
+  end
+
+  sequence :admin do
+    false
+  end
+
+  sequence :location do | n |
+    "location#{ n }"
+  end
+
+  sequence :bio do | n |
+    "Author#{ n } was born #{ n } years ago in location#{ n }."
+  end
+
 end
 
 FactoryGirl.define do
-  sequence :username do |n|
-    "author#{n}"
-  end
-end
 
-FactoryGirl.define do
   factory :author, :class => 'Author' do
-    email
     username
-    confirmed_at = Time.now
+    email
+    admin
+    location
+    bio
     password 'password'
     password_confirmation 'password'
-  end
-end
+    confirmed_at = Time.now
 
-FactoryGirl.define do
-  factory :admin_author, :class => 'Author' do
-    email
-    username
-    admin true
-    confirmed_at = Time.now
-    password 'password'
-    password_confirmation 'password'
+    trait :admin do
+      admin true
+    end
   end
+
 end
