@@ -2,23 +2,26 @@ require 'rails_helper'
 
 RSpec.describe AuthorsController, type: :controller do
 
-  describe "GET #index" do
-    it "responds successfully with an HTTP 200 status code" do
+  describe "#index" do
+    it "allows GP to see authors#index page" do
       get :index
       expect(response).to be_success
       expect(response).to have_http_status(200)
-    end
-
-    it "renders the index template" do
-      get :index
       expect(response).to render_template("index")
     end
 
-    xit "loads all of the posts into @posts" do
-      author1, author2 = Author.create!, Author.create!
+    it "allows a non-admin author to see authors#index page" do
+      login_as create( :author ), scope: :author
       get :index
+      expect( response ).to render_template( :index )
+      expect( response.body ).to have_content 'author'
+    end
 
-      expect(assigns(:authors)).to match_array([author1, author2])
+    it "allows an admin author to see authors#index page w/ admin links" do
+      login_as create( :admin_author ), scope: :author
+      get :index
+      expect( response ).to render_template( :index )
+      expect( response.body ).to have_content 'admin'
     end
   end
 
