@@ -8,10 +8,6 @@ FactoryGirl.define do
     "author#{ n }@example.com"
   end
 
-  sequence :admin do
-    false
-  end
-
   sequence :location do | n |
     "location#{ n }"
   end
@@ -27,14 +23,15 @@ FactoryGirl.define do
   factory :author, :class => 'Author' do
     username
     email
-    admin
     location
     bio
+    admin = "fish"
     password 'password'
     password_confirmation 'password'
-    confirmed_at = Time.now
+    confirmed_at { Time.now }
+    invitation_accepted_at { Time.zone.now }
 
-    trait :admin do
+    factory :admin do
       admin true
     end
   end

@@ -1,3 +1,9 @@
 <h1>AUTHORS SHOW</h1>
 
-<%= @author.username %>
+<%= link_to "index", authors_path %>
+
+<p>( author profile photo )</p>
+<p>username: <%= @author.username %></p>
+<p>email: <%= @author.email %></p>
+<p>bio: <%= @author.bio %></p>
+<p>locaiton: <%= @author.location %></p>
