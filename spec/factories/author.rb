@@ -25,7 +25,6 @@ FactoryGirl.define do
     email
     location
     bio
-    admin = "fish"
     password 'password'
     password_confirmation 'password'
     confirmed_at { Time.now }
