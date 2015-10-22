@@ -1,11 +1,15 @@
 FactoryGirl.define do
   
+  sequence :id do | n |
+    "#{ n }"
+  end
+
   sequence :username do | n |
     "author#{ n }"
   end
 
   sequence :email do | n |
-    "author#{ n }@example.com"
+    "email#{ n }@example.com"
   end
 
   sequence :location do | n |
