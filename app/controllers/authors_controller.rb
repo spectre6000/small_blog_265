@@ -10,8 +10,12 @@ class AuthorsController < ApplicationController
   end
 
   def destroy
-    Author.find( params[ :id ] ).destroy
-    flash[ :success ] = "Author deleted."
+    if Author.find( params[ :id ] ).id != current_author.id 
+      Author.find( params[ :id ] ).destroy
+      flash[ :success ] = "Author deleted."
+    else
+      flash[ :danger ] = "You can't delete yourself."
+    end
     redirect_to authors_url
   end
 

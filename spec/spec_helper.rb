@@ -1,4 +1,3 @@
-
 require_relative 'support/controller_helpers'
 require 'devise'
 
