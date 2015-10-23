@@ -12,8 +12,11 @@ RSpec.feature "Authors creation and sessions", :type => :feature do
 
     context "no authors signed in" do
 
-      scenario "Authors index page" do
+      before ( :each ) do
         logout( :author )
+      end
+
+      scenario "Authors index page" do
         visit 'authors'
         expect( page ).to have_content "All authors"
         expect( page ).to have_content "sign in"
@@ -42,8 +45,12 @@ RSpec.feature "Authors creation and sessions", :type => :feature do
     end
 
     context "non-admin author signed in" do
-      scenario "Authors index page" do
+
+      before ( :each ) do
         login_as( author1 )
+      end
+
+      scenario "Authors index page" do
         visit 'authors'
         expect( page ).to have_content "All authors"
         expect( page ).to have_content "sign out"
@@ -67,8 +74,12 @@ RSpec.feature "Authors creation and sessions", :type => :feature do
     end
 
     context "admin author signed in" do
-      scenario "Authors index page" do
+
+      before ( :each ) do
         login_as( admin1 )
+      end
+
+      scenario "Authors index page" do
         visit 'authors'
         expect( page ).to have_content "All authors"
         expect( page ).to have_content "sign out"
@@ -92,6 +103,14 @@ RSpec.feature "Authors creation and sessions", :type => :feature do
         expect( page ).to have_content "bio: #{ admin1.bio }"
         expect( page ).to have_content "location: #{ admin1.location }"
       end
+
+      scenario "Author can delete other users" do
+        visit 'authors'
+        author_count = ( Author.all.count )
+        page.find('div', :text => "#{author1.username}").click_link('delete')
+        expect( Author.all.count ).to eq( author_count - 1 )
+      end
+
     end
 
 
