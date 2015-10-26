@@ -16,6 +16,18 @@ RSpec.feature "Author creation and sessions", :type => :feature do
       element_array.each{ | element, count | expect( page ).to have_content( element, count ) }
     end
 
+    def author_count
+      ( Author.all.count )
+    end
+
+    def last_email
+      ActionMailer::Base.deliveries.last
+    end
+    
+    def reset_email
+      ActionMailer::Base.deliveries = []
+    end
+
   describe "Author accounts and sessions" do
 
     test_users = [  [ :admin1, :admin ], 
@@ -130,9 +142,9 @@ RSpec.feature "Author creation and sessions", :type => :feature do
       end
 
       it "allows an Admin to delete other users" do
-        author_count = ( Author.all.count )
+        counted_authors = author_count
         page.find( 'div', :text => "#{ author1.username }" ).click_link( 'delete' )
-        expect( Author.all.count ).to eq( author_count - 1 )
+        expect( Author.all.count ).to eq( counted_authors - 1 )
       end
 
       it "does not giv the Admin the option to delete themselves" do
@@ -141,11 +153,11 @@ RSpec.feature "Author creation and sessions", :type => :feature do
       end
 
       it "does not allow an Admin to delete self even if the link is somehow present" do
-        author_count = ( Author.all.count )
+        counted_authors = author_count
         paginate( 'div', "#{ admin1.username }" )
         if page.find( 'div', :text => "#{ admin1.username }" ).has_link?( 'delete' )
           page.find( 'div', :text => "#{ admin1.username }" ).click_link( 'delete' )
-          expect( Author.all.count ).to eq( author_count )
+          expect( author_count ).to eq( counted_authors )
         end
       end
 
@@ -155,6 +167,37 @@ RSpec.feature "Author creation and sessions", :type => :feature do
                           [ "Email" ] ]
         page_element_test( page_elements )
         expect( page ).to have_button( "Send an invitation" )
+      end
+
+    end
+
+    describe "admin author can invite new users" do
+
+      before ( :each ) do
+        login_as( admin1 )
+        visit( 'authors' )
+      end
+
+      after ( :each ) do
+        reset_email
+      end
+
+      it "sends invitation email" do
+        click_link( 'invite new author' )
+        fill_in( "Email", :with => "emailtest@example.com" )
+        click_button( "Send an invitation" )
+        expect( current_path).to eq( '/' )
+        expect( last_email ).to have_content( "emailtest@example.com" )
+      end
+
+      it "creates unconfirmed new user" do
+        counted_authors = author_count
+        click_link( 'invite new author' )
+        fill_in( "Email", :with => "emailtest@example.com" )
+        click_button( "Send an invitation" )
+        expect( author_count ).to eq( counted_authors + 1 )
+        # balance of this interaction tested within devise_invitable 
+        # @ https://github.com/scambra/devise_invitable/blob/master/test/integration/invitation_test.rb
       end
 
     end
