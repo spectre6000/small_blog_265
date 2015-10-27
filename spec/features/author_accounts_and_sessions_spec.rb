@@ -2,33 +2,7 @@ require 'rails_helper'
 
 RSpec.feature "Author creation and sessions", :type => :feature do
 
-    def paginate( selector, text )
-      if !page.has_css?( selector, :text => text )
-        if page.has_css?( '.previous_page.disabled' )
-          page.find( '.next_page' ).click
-        else
-          page.find( '.previous_page' ).click
-        end
-      end
-    end
-
-    def page_element_test( element_array )
-      element_array.each{ | element, count | expect( page ).to have_content( element, count ) }
-    end
-
-    def author_count
-      ( Author.all.count )
-    end
-
-    def last_email
-      ActionMailer::Base.deliveries.last
-    end
-    
-    def reset_email
-      ActionMailer::Base.deliveries = []
-    end
-
-  describe "Author accounts and sessions" do
+  # describe "Author accounts and sessions" do
 
     test_users = [  [ :admin1, :admin ], 
                     [ :admin2, :admin], 
@@ -37,7 +11,7 @@ RSpec.feature "Author creation and sessions", :type => :feature do
     test_users.each{ | name, type | let!( name ) { create( type ) } }
     let!( :extra_authors ) { 15.times { create( :author ) } }
 
-    describe "no authors signed in" do
+    context "no authors signed in" do
 
       before ( :all ) do
         logout( :author )
@@ -69,13 +43,13 @@ RSpec.feature "Author creation and sessions", :type => :feature do
                           [ "( profile photo )" ],
                           [ "username: #{ admin1.username }" ],
                           [ "email: #{ admin1.email }" ],
-                          [ "bio: #{ admin1.bio }" ],
-                          [ "location: #{ admin1.location }" ] ]
+                          [ "About #{ admin1.username }: #{ admin1.bio }" ],
+                          [ "Location: #{ admin1.location }" ] ]
         page_element_test( page_elements )
       end
     end
 
-    describe "non-admin author signed in" do
+    context "non-admin author signed in" do
 
       before ( :each ) do
         login_as( author1 )
@@ -102,13 +76,13 @@ RSpec.feature "Author creation and sessions", :type => :feature do
                           [ "( profile photo )" ],
                           [ "username: #{ admin1.username }" ],
                           [ "email: #{ admin1.email }" ],
-                          [ "bio: #{ admin1.bio }" ],
-                          [ "location: #{ admin1.location }" ] ]
+                          [ "About #{ admin1.username }: #{ admin1.bio }" ],
+                          [ "Location: #{ admin1.location }" ] ]
         page_element_test( page_elements )
       end
     end
 
-    describe "admin author signed in" do
+    context "admin author signed in" do
 
       before ( :each ) do
         login_as( admin1 )
@@ -136,8 +110,8 @@ RSpec.feature "Author creation and sessions", :type => :feature do
                           [ "( profile photo )" ],
                           [ "username: #{ admin1.username }" ],
                           [ "email: #{ admin1.email }" ],
-                          [ "bio: #{ admin1.bio }" ],
-                          [ "location: #{ admin1.location }" ] ]
+                          [ "About #{ admin1.username }: #{ admin1.bio }" ],
+                          [ "Location: #{ admin1.location }" ] ]
         page_element_test( page_elements )
       end
 
@@ -202,6 +176,6 @@ RSpec.feature "Author creation and sessions", :type => :feature do
 
     end
 
-  end
+  # end
 
 end

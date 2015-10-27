@@ -76,6 +76,6 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  # config.include FeatureHelpers, type: :feature
+  config.include FeatureHelpers, type: :feature
 
 end
