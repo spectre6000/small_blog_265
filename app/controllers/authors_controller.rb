@@ -10,7 +10,11 @@ class AuthorsController < ApplicationController
   end
 
   def edit
-    @author = Author.find( params[ :id ] )
+    if current_author == Author.find( params[ :id ] )
+      @author = Author.find( params[ :id ] )
+    else
+      redirect_to Author.find( params[ :id ] )
+    end
   end
 
   def update

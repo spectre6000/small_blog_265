@@ -1,5 +1,6 @@
 module FeatureHelpers
 
+  # Allows creation of multi-dimenional array of page elements to be iterated through and tested for presence
   def page_element_test( element_array )
     element_array.each{ | element, count | expect( page ).to have_content( element, count ) }
   end
@@ -16,14 +17,14 @@ module FeatureHelpers
     ActionMailer::Base.deliveries = []
   end
 
-  def paginate( selector, text )
-    if !page.has_css?( selector, :text => text )
-      if page.has_css?( '.previous_page.disabled' )
-        page.find( '.next_page' ).click
-      else
-        page.find( '.previous_page' ).click
-      end
-    end
-  end
+  # def paginate( selector, text )
+    # if !page.has_css?( selector, :text => text )
+    #   if page.has_css?( '.previous_page.disabled' )
+    #     page.find( '.next_page' ).click
+    #   else
+    #     page.find( '.previous_page' ).click
+    #   end
+    # end
+  # end
 
 end
