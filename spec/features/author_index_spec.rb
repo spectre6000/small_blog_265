@@ -4,49 +4,25 @@ RSpec.feature "Author index page", :type => :feature do
 
   describe "#index" do
 
-    test_users = [  [ :admin1, :admin ], 
-                    [ :admin2, :admin], 
-                    [ :author1, :author ], 
-                    [ :author2, :author ] ]
-    test_users.each{ | name, type | let!( name ) { create( type ) } }
-    let!( :extra_authors ) { 6.times { create( :author ) } }
+    let!( :admin1 ) { create( :admin ) }
+    let!( :author1 ) { create( :author ) }
 
     context "no author signed in" do
-
-      it "properly displays the Authors index page" do
-        visit( 'authors' )
-        page_elements = [ #[ "All authors" ],
-                          #[ "sign in" ],
-                          [ author1.username ],
-                          [ author2.username ],
-                          [ admin1.username ],
-                          [ admin2.username ],
-                          [ author1.email ],
-                          [ author2.email ],
-                          [ admin1.email ],
-                          [ admin2.email ],
-                          [ "profile image", count: 10 ],
-                          [ "banner image", count: 10 ],
-                          [ "delete", count: 0 ],
-                          [ "make admin", count: 0 ] ]
-        page_element_test( page_elements )
-      end
 
       before( :each ) do
         visit( 'authors' )
       end
 
-      it "displays the page title" do
-        expect( page.body ).to have_content( "All authors" )
+      it "does not give a guest user an invitation link" do
+        expect( page.body ).to_not have_link( "invite new author" )
       end
 
-      it "displays sign in link" do
-        expect( page.body ).to have_content( "sign in" )
+      it "does not give a guest user a delete link" do
+        expect( page.body ).to_not have_link( "delete" )
       end
 
-      it "displays author names
-      " do
-        expect( page.body ).to have_content( "sign in" )
+      it "does not allows a guest user to make other users admins" do
+        expect( page.body ).to_not have_link( "make admin" )
       end
 
     end
@@ -57,18 +33,16 @@ RSpec.feature "Author index page", :type => :feature do
         login_as( author1 )
       end
 
-      it "properly displays the Authors index page" do
-        visit( 'authors' )
-        page_elements = [ [ "All authors" ],
-                          [ "sign out" ],
-                          # authors paginated plus the index title
-                          [ "author", count: 11 ],
-                          [ "@example.com", count: 10 ],
-                          [ "profile image", count: 10 ],
-                          [ "banner image", count: 10 ],
-                          [ "delete", count: 0 ],
-                          [ "make admin", count: 0 ] ]
-        page_element_test( page_elements )
+      it "does not give a non-admin author an invitation link" do
+        expect( page.body ).to_not have_link( "invite new author" )
+      end
+
+      it "does not give a non-admin author a delete link" do
+        expect( page.body ).to_not have_link( "delete" )
+      end
+
+      it "does not allows a non-admin author to make other users admins" do
+        expect( page.body ).to_not have_link( "make admin" )
       end
 
     end
@@ -80,47 +54,28 @@ RSpec.feature "Author index page", :type => :feature do
         visit( 'authors' )
       end
 
-      it "properly displays the Admin index page" do
-        page_elements = [ [ "All authors" ],
-                          [ "sign out" ],
-                          [ "invite new author" ],
-                          # authors paginated plus the index title plus "invite new author" link
-                          [ "author", count: 12 ],
-                          [ "@example.com", count: 10 ],
-                          [ "profile image", count: 10 ],
-                          [ "banner image", count: 10 ],
-                          [ "delete", count: 9 ],
-                          [ "make admin", count: 9 ] ]
-        page_element_test( page_elements )
+      it "gives admin authors an invitation link" do
+        expect( page.body ).to have_link( "invite new author" )
+      end
+
+      it "gives admin authors a delete link" do
+        expect( page.body ).to have_link( "delete" )
+      end
+
+      xit "gives admin authors a make admin link" do
+        expect( page.body ).to have_link( "make admin" )
       end
       
       it "allows an Admin to delete other users" do
         expect{ page.find( 'div', :text => "#{ author1.username }" ).click_link( 'delete' ) }.to change( Author, :count ).by( -1 )
       end
 
-      it "does not giv the Admin the option to delete themselves" do
-        if !page.has_css?( 'div', :text => "#{ admin1.username }" )
-          if page.has_css?( '.previous_page.disabled' )
-            page.find( '.next_page' ).click
-          else
-            page.find( '.previous_page' ).click
-          end
-        end
-        expect( page.find( 'div', :text => "#{ admin1.username }" ) ).to have_link( "delete", count: 0 )
+      it "does not give an Admin a delete link for themselves" do
+        expect( page.find( 'div', :text => "#{ admin1.username }" ) ).to_not have_link( "delete" )
       end
 
-      it "does not allow an Admin to delete self even if the link is somehow present" do
-        if !page.has_css?( 'div', :text => "#{ admin1.username }" )
-          if page.has_css?( '.previous_page.disabled' )
-            page.find( '.next_page' ).click
-          else
-            page.find( '.previous_page' ).click
-          end
-        end
-        if page.find( 'div', :text => "#{ admin1.username }" ).has_link?( 'delete' )
-          page.find( 'div', :text => "#{ admin1.username }" ).click_link( 'delete' )
-          expect{ page.find( 'div', :text => "#{ admin1.username }" ).click_link( 'delete' ) }.to change( Author, :count ).by( 0 )
-        end
+      it "does not allow an Admin to delete self manually" do
+        expect{ page.driver.submit( :delete, "/authors/#{ admin1.id }", {} ) }.to change( Author, :count ).by( 0 )
       end
 
     end
