@@ -17,38 +17,6 @@ RSpec.feature "Author profile page", :type => :feature do
           visit( "authors/#{ author1.id }" )
         end
 
-        it "displays the page title" do
-          expect( page.body ).to have_content( "AUTHORS SHOW" )
-        end
-
-        it "displays the authors index link" do
-          expect( page.body ).to have_link( "index" )
-        end
-
-        it "displays the Author profile photo" do
-          expect( page.body ).to have_content( "( profile photo )" )
-        end
-
-        it "displays the Author banner photo" do
-          expect( page.body ).to have_content( "( banner photo )" )
-        end
-
-        it "displays the Author username" do
-          expect( page.body ).to have_content( "username: #{ author1.username }" )
-        end
-
-        it "displays the Author email" do
-          expect( page.body ).to have_content( "email: #{ author1.email }" )
-        end
-
-        it "displays the Author bio" do
-          expect( page.body ).to have_content( "About #{ author1.username }: #{ author1.bio }" )
-        end
-
-        it "displays the Author location" do
-          expect( page.body ).to have_content( "Location: #{ author1.location }" )
-        end
-
         it "does not show bio edit link" do
           expect( page.body ).to_not have_link( "About #{ author1.username }:" )
         end
@@ -63,38 +31,6 @@ RSpec.feature "Author profile page", :type => :feature do
 
         before( :each ) do
           visit( "authors/#{ admin1.id }" )
-        end
-
-        it "displays the page title" do
-          expect( page.body ).to have_content( "AUTHORS SHOW" )
-        end
-
-        it "displays the authors index link" do
-          expect( page.body ).to have_link( "index" )
-        end
-
-        it "displays the Author profile photo" do
-          expect( page.body ).to have_content( "( profile photo )" )
-        end
-
-        it "displays the Author banner photo" do
-          expect( page.body ).to have_content( "( banner photo )" )
-        end
-
-        it "displays the Author username" do
-          expect( page.body ).to have_content( "username: #{ admin1.username }" )
-        end
-
-        it "displays the Author email" do
-          expect( page.body ).to have_content( "email: #{ admin1.email }" )
-        end
-
-        it "displays the Author bio" do
-          expect( page.body ).to have_content( "About #{ admin1.username }: #{ admin1.bio }" )
-        end
-
-        it "displays the Author location" do
-          expect( page.body ).to have_content( "Location: #{ admin1.location }" )
         end
 
         it "does not show bio edit link" do
@@ -121,43 +57,11 @@ RSpec.feature "Author profile page", :type => :feature do
           visit( "authors/#{ author1.id }" )
         end
 
-        it "displays the page title" do
-          expect( page.body ).to have_content( "AUTHORS SHOW" )
-        end
-
-        it "displays the authors index link" do
-          expect( page.body ).to have_link( "index" )
-        end
-
-        it "displays the Author profile photo" do
-          expect( page.body ).to have_content( "( profile photo )" )
-        end
-
-        it "displays the Author banner photo" do
-          expect( page.body ).to have_content( "( banner photo )" )
-        end
-
-        it "displays the Author username" do
-          expect( page.body ).to have_content( "username: #{ author1.username }" )
-        end
-
-        it "displays the Author email" do
-          expect( page.body ).to have_content( "email: #{ author1.email }" )
-        end
-
-        it "displays the Author bio" do
-          expect( page.body ).to have_content( "About #{ author1.username }: #{ author1.bio }" )
-        end
-
-        it "displays the Author location" do
-          expect( page.body ).to have_content( "Location: #{ author1.location }" )
-        end
-
-        it "does not show bio edit link" do
+        it "shows bio edit link" do
           expect( page.body ).to have_link( "About #{ author1.username }:" )
         end
 
-        it "does not show location edit link" do
+        it "shows location edit link" do
           expect( page.body ).to have_link( "Location:" )
         end
 
@@ -167,38 +71,6 @@ RSpec.feature "Author profile page", :type => :feature do
 
         before( :each ) do
           visit( "authors/#{ author2.id }" )
-        end
-
-        it "displays the page title" do
-          expect( page.body ).to have_content( "AUTHORS SHOW" )
-        end
-
-        it "displays the authors index link" do
-          expect( page.body ).to have_link( "index" )
-        end
-
-        it "displays the Author profile photo" do
-          expect( page.body ).to have_content( "( profile photo )" )
-        end
-
-        it "displays the Author banner photo" do
-          expect( page.body ).to have_content( "( banner photo )" )
-        end
-
-        it "displays the Author username" do
-          expect( page.body ).to have_content( "username: #{ author2.username }" )
-        end
-
-        it "displays the Author email" do
-          expect( page.body ).to have_content( "email: #{ author2.email }" )
-        end
-
-        it "displays the Author bio" do
-          expect( page.body ).to have_content( "About #{ author2.username }: #{ author2.bio }" )
-        end
-
-        it "displays the Author location" do
-          expect( page.body ).to have_content( "Location: #{ author2.location }" )
         end
 
         it "does not show bio edit link" do
@@ -215,38 +87,6 @@ RSpec.feature "Author profile page", :type => :feature do
 
         before( :each ) do
           visit( "authors/#{ admin1.id }" )
-        end
-
-        it "displays the page title" do
-          expect( page.body ).to have_content( "AUTHORS SHOW" )
-        end
-
-        it "displays the authors index link" do
-          expect( page.body ).to have_link( "index" )
-        end
-
-        it "displays the Author profile photo" do
-          expect( page.body ).to have_content( "( profile photo )" )
-        end
-
-        it "displays the Author banner photo" do
-          expect( page.body ).to have_content( "( banner photo )" )
-        end
-
-        it "displays the Author username" do
-          expect( page.body ).to have_content( "username: #{ admin1.username }" )
-        end
-
-        it "displays the Author email" do
-          expect( page.body ).to have_content( "email: #{ admin1.email }" )
-        end
-
-        it "displays the Author bio" do
-          expect( page.body ).to have_content( "About #{ admin1.username }: #{ admin1.bio }" )
-        end
-
-        it "displays the Author location" do
-          expect( page.body ).to have_content( "Location: #{ admin1.location }" )
         end
 
         it "does not show bio edit link" do
@@ -272,38 +112,6 @@ RSpec.feature "Author profile page", :type => :feature do
           visit( "authors/#{ author1.id }" )
         end
 
-        it "displays the page title" do
-          expect( page.body ).to have_content( "AUTHORS SHOW" )
-        end
-
-        it "displays the authors index link" do
-          expect( page.body ).to have_link( "index" )
-        end
-
-        it "displays the Author profile photo" do
-          expect( page.body ).to have_content( "( profile photo )" )
-        end
-
-        it "displays the Author banner photo" do
-          expect( page.body ).to have_content( "( banner photo )" )
-        end
-
-        it "displays the Author username" do
-          expect( page.body ).to have_content( "username: #{ author1.username }" )
-        end
-
-        it "displays the Author email" do
-          expect( page.body ).to have_content( "email: #{ author1.email }" )
-        end
-
-        it "displays the Author bio" do
-          expect( page.body ).to have_content( "About #{ author1.username }: #{ author1.bio }" )
-        end
-
-        it "displays the Author location" do
-          expect( page.body ).to have_content( "Location: #{ author1.location }" )
-        end
-
         it "does not show bio edit link" do
           expect( page.body ).to_not have_link( "About #{ author1.username }:" )
         end
@@ -318,38 +126,6 @@ RSpec.feature "Author profile page", :type => :feature do
 
         before( :each ) do
           visit( "authors/#{ admin2.id }" )
-        end
-
-        it "displays the page title" do
-          expect( page.body ).to have_content( "AUTHORS SHOW" )
-        end
-
-        it "displays the authors index link" do
-          expect( page.body ).to have_link( "index" )
-        end
-
-        it "displays the Author profile photo" do
-          expect( page.body ).to have_content( "( profile photo )" )
-        end
-
-        it "displays the Author banner photo" do
-          expect( page.body ).to have_content( "( banner photo )" )
-        end
-
-        it "displays the Author username" do
-          expect( page.body ).to have_content( "username: #{ admin2.username }" )
-        end
-
-        it "displays the Author email" do
-          expect( page.body ).to have_content( "email: #{ admin2.email }" )
-        end
-
-        it "displays the Author bio" do
-          expect( page.body ).to have_content( "About #{ admin2.username }: #{ admin2.bio }" )
-        end
-
-        it "displays the Author location" do
-          expect( page.body ).to have_content( "Location: #{ admin2.location }" )
         end
 
         it "does not show bio edit link" do
@@ -368,43 +144,11 @@ RSpec.feature "Author profile page", :type => :feature do
           visit( "authors/#{ admin1.id }" )
         end
 
-        it "displays the page title" do
-          expect( page.body ).to have_content( "AUTHORS SHOW" )
-        end
-
-        it "displays the authors index link" do
-          expect( page.body ).to have_link( "index" )
-        end
-
-        it "displays the Author profile photo" do
-          expect( page.body ).to have_content( "( profile photo )" )
-        end
-
-        it "displays the Author banner photo" do
-          expect( page.body ).to have_content( "( banner photo )" )
-        end
-
-        it "displays the Author username" do
-          expect( page.body ).to have_content( "username: #{ admin1.username }" )
-        end
-
-        it "displays the Author email" do
-          expect( page.body ).to have_content( "email: #{ admin1.email }" )
-        end
-
-        it "displays the Author bio" do
-          expect( page.body ).to have_content( "About #{ admin1.username }: #{ admin1.bio }" )
-        end
-
-        it "displays the Author location" do
-          expect( page.body ).to have_content( "Location: #{ admin1.location }" )
-        end
-
-        it "does not show bio edit link" do
+        it "shows bio edit link" do
           expect( page.body ).to have_link( "About #{ admin1.username }:" )
         end
 
-        it "does not show location edit link" do
+        it "shows location edit link" do
           expect( page.body ).to have_link( "Location:" )
         end
 
