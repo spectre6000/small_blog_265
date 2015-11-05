@@ -38,6 +38,14 @@ class AuthorsController < ApplicationController
     redirect_to authors_url
   end
 
+  def toggle_admin
+    @new_admin = Author.find( params[ :id ] )
+    @new_admin.admin = true
+    @new_admin.save
+    # Probably convert to ajax after initial functionality is established
+    redirect_to root_path
+  end
+
   private
 
     def author_params
@@ -47,7 +55,6 @@ class AuthorsController < ApplicationController
     # Confirms the correct author.
     def correct_author?
       current_author == @author ? true : false ;
-      # redirect_to( root_url ) unless current_author?( @author )
     end
 
     # Confirms an admin author.

@@ -5,4 +5,5 @@ class Author < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :lockable, :validatable
 
   validates :username, :email, presence: true
+
 end

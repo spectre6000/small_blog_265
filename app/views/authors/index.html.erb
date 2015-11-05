@@ -18,8 +18,12 @@
         <span>banner image</span>
         <span><%= link_to author.username, author %></span>
         <span><%= author.email %></span>
-        <% if current_author && current_author.admin? && author.id != current_author.id %>
-          <span><%= link_to "delete", author, method: :delete, data: { confirm: "Are you sure?" } %> | make admin</span>
+        <% if current_author && current_author.admin? && author.id != current_author.id && !author.admin?%>
+          <span>
+            <%= link_to( "delete", author, method: :delete, data: { confirm: "Are you sure?" } ) %>
+             | 
+            <%= link_to( "make admin", author_toggle_admin_path( :author_id => author.id, :id => author.id ), :action => 'toggle_admin', method: :patch ) %>
+          </span>
         <% end %>
       </div>
     <% end %>

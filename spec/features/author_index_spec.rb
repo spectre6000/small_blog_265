@@ -62,8 +62,18 @@ RSpec.feature "Author index page", :type => :feature do
         expect( page.body ).to have_link( "delete" )
       end
 
-      xit "gives admin authors a make admin link" do
-        expect( page.body ).to have_link( "make admin" )
+      it "gives admin authors a make admin link" do
+        expect( page.find( 'div', :text => "#{ author1.username }" ) ).to have_link( "make admin" )
+      end
+
+      it "does not give an Admin a make admin link for themselves" do
+        expect( page.find( 'div', :text => "#{ admin1.username }" ) ).to_not have_link( "make admin" )
+      end
+
+      it "allows an Admin to make other users admins" do
+        page.find( 'div', :text => "#{ author1.username }" ).click_link( 'make admin' )
+        author1.reload
+        expect( author1.admin ).to eq( true )
       end
       
       it "allows an Admin to delete other users" do
