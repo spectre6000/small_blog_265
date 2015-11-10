@@ -1,11 +1,9 @@
 class AddAttachmentProfileImageToAuthors < ActiveRecord::Migration
-  def self.up
-    change_table :authors do |t|
-      t.attachment :profile_image
-    end
+  def up
+    add_attachment :authors, :profile_image
   end
 
-  def self.down
+  def down
     remove_attachment :authors, :profile_image
   end
 end

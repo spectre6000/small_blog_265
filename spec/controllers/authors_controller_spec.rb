@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe AuthorsController, type: :controller do
-  # include Capybara::DSL
 
   let( :author1 ) { create( :author ) }
   let( :author2 ) { create( :author ) }
@@ -33,8 +32,8 @@ RSpec.describe AuthorsController, type: :controller do
     context "non-admin author logged in" do
 
       before ( :each ) do
+        sign_in( author1 )
         get( :index )
-        login_as( author1 )
       end
       
       it "returns success" do
@@ -55,7 +54,7 @@ RSpec.describe AuthorsController, type: :controller do
 
       before ( :each ) do
         get( :index )
-        login_as( admin1 )
+        sign_in( admin1 )
       end
       
       it "returns success" do
@@ -99,7 +98,7 @@ RSpec.describe AuthorsController, type: :controller do
     context "non-admin author logged in" do
 
       before ( :each ) do
-        login_as( author1 )
+        sign_in( author1 )
         get( :show, id: author1.id )
       end
       
@@ -120,7 +119,7 @@ RSpec.describe AuthorsController, type: :controller do
     context "admin author logged in" do
 
       before ( :each ) do
-        login_as( admin1 )
+        sign_in( admin1 )
         get( :show, id: author1.id )
       end
       

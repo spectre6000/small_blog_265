@@ -7,7 +7,7 @@ RSpec.describe Author, type: :model do
   end
 
   it 'is invalid without a username' do
-    expect( build( :author, username: nil ) ).to_not be_valid
+    expect( build( :author, username: nil, bio: nil, email: "username@email.com" ) ).to_not be_valid
   end
 
   it 'is invalid without an email address' do

@@ -30,7 +30,7 @@ RSpec.feature "Author index page", :type => :feature do
     context "non-admin author signed in" do
 
       before ( :each ) do
-        login_as( author1 )
+        login_as( @author1 )
       end
 
       it "does not give a non-admin author an invitation link" do
