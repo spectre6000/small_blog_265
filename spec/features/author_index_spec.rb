@@ -5,7 +5,7 @@ RSpec.feature "Author index page", :type => :feature do
   describe "#index" do
 
     # RSpec test objects
-    let!( :admin1 ) { create( :admin ) }
+    let( :admin1 ) { create( :admin ) }
     let!( :author1 ) { create( :author ) }
 
     context "no author signed in" do

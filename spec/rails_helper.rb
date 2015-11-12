@@ -51,7 +51,7 @@ RSpec.configure do |config|
   #
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
-  config.infer_spec_type_from_file_location!
+  # config.infer_spec_type_from_file_location!
   config.include Devise::TestHelpers, type: :controller
   config.include FactoryGirl::Syntax::Methods
   config.include Warden::Test::Helpers
@@ -72,8 +72,16 @@ RSpec.configure do |config|
     DatabaseCleaner.start
   end
 
+  config.before(:each) do
+    Warden.test_mode!
+  end
+
   config.after(:each) do
     DatabaseCleaner.clean
+  end
+
+  config.after :each do
+    Warden.test_reset!
   end
 
   config.include FeatureHelpers, type: :feature

@@ -1,3 +1,4 @@
+
 require 'rails_helper'
 
 RSpec.feature "Editing author profiles", :type => :feature do
@@ -30,7 +31,7 @@ RSpec.feature "Editing author profiles", :type => :feature do
 
     context "logged in author" do
 
-      before ( :each ) do
+      before( :each ) do
         # Warden session
         login_as( author1 )
       end
@@ -47,6 +48,10 @@ RSpec.feature "Editing author profiles", :type => :feature do
         visit( edit_author_path( author2.id ) )
         # Test
         expect( current_path ).to eq( author_path( author2.id ) )
+      end
+
+      it "edits profile photo" do
+        expect( true ).to eq( true )
       end
       
       it "edits bio" do

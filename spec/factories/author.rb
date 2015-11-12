@@ -1,3 +1,5 @@
+include ActionDispatch::TestProcess
+
 FactoryGirl.define do
 
   sequence :username do | n |
@@ -17,6 +19,7 @@ FactoryGirl.define do
     password_confirmation 'password'
     confirmed_at { Time.now }
     invitation_accepted_at { Time.zone.now }
+    profile_image { fixture_file_upload( Rails.root.join( 'spec', 'factories', 'images', "test_image.png" ), 'image/png' ) }
 
     factory :admin do
       admin true

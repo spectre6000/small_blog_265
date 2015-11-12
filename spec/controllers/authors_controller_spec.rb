@@ -61,7 +61,7 @@ RSpec.describe AuthorsController, type: :controller do
     end
 
     context "admin author logged in" do
-
+      
       before ( :each ) do
         # Navigation
         get( :index )
