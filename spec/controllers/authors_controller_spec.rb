@@ -5,7 +5,7 @@ RSpec.describe AuthorsController, type: :controller do
   # RSpec test objects
   let( :author1 ) { create( :author ) }
   let( :author2 ) { create( :author ) }
-  let( :admin1 ) { create( :admin ) }
+  let( :admin1 ) { create( :admin ) } 
   let( :admin2 ) { create( :admin ) }
 
   describe "#index" do
@@ -61,7 +61,7 @@ RSpec.describe AuthorsController, type: :controller do
     end
 
     context "admin author logged in" do
-      
+
       before ( :each ) do
         # Navigation
         get( :index )

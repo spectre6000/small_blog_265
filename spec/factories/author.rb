@@ -19,7 +19,8 @@ FactoryGirl.define do
     password_confirmation 'password'
     confirmed_at { Time.now }
     invitation_accepted_at { Time.zone.now }
-    profile_image { fixture_file_upload( Rails.root.join( 'spec', 'factories', 'images', "test_image.png" ), 'image/png' ) }
+    profile_image { File.new( "#{ Rails.root }/spec/factories/images/test_image1.png" ) } 
+    banner_image { File.new( "#{ Rails.root }/spec/factories/images/test_image1.png" ) } 
 
     factory :admin do
       admin true

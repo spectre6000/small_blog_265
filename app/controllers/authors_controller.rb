@@ -49,7 +49,7 @@ class AuthorsController < ApplicationController
   private
 
     def author_params
-      params.require( :author ).permit( :bio, :location, :profile_image )
+      params.require( :author ).permit( :bio, :location, :profile_image, :banner_image )
     end
 
     # Confirms the correct author.

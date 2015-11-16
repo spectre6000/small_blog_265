@@ -2,8 +2,8 @@
 
 <%= link_to "index", authors_path %>
 
-<p>( profile photo )</p>
-<p>( banner photo )</p>
+<%= image_tag @author.profile_image %><br>
+<%= image_tag @author.banner_image %><br>
 <p>username: <%= @author.username %></p>
 <p>email: <%= @author.email %></p>
 <p>About <%= @author.username %>: <%= @author.bio %></p>

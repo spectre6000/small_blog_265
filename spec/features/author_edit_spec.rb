@@ -50,8 +50,24 @@ RSpec.feature "Editing author profiles", :type => :feature do
         expect( current_path ).to eq( author_path( author2.id ) )
       end
 
-      it "edits profile photo" do
-        expect( true ).to eq( true )
+      it "edits profile image" do
+        # Capybara navigation
+        visit( edit_author_path( author1.id ) )
+        attach_file( 'Profile Image', Rails.root + 'spec/factories/images/test_image2.png' )
+        click_button( 'Save' )
+        author1.reload
+        # Test
+        expect( author1.profile_image_file_name ).to eq( 'test_image2.png' )
+      end
+
+      it "edits banner image" do
+        # Capybara navigation
+        visit( edit_author_path( author1.id ) )
+        attach_file( 'Banner Image', Rails.root + 'spec/factories/images/test_image2.png' )
+        click_button( 'Save' )
+        author1.reload
+        # Test
+        expect( author1.banner_image_file_name ).to eq( 'test_image2.png' )
       end
       
       it "edits bio" do
@@ -62,7 +78,7 @@ RSpec.feature "Editing author profiles", :type => :feature do
         fill_in( "About #{ author1.username }:", :with => new_bio )
         click_button( 'Save' )
         # Refresh for test
-        author1.reload
+        author1.reload 
         # Test
         expect( author1.bio ).to eq( new_bio )
       end
@@ -101,6 +117,26 @@ RSpec.feature "Editing author profiles", :type => :feature do
         visit( edit_author_path( admin2.id ) )
         # Test
         expect( current_path ).to eq( author_path( admin2.id ) )
+      end
+
+      it "edits profile image" do
+        # Capybara navigation
+        visit( edit_author_path( admin1.id ) )
+        attach_file( 'Profile Image', Rails.root + 'spec/factories/images/test_image2.png' )
+        click_button( 'Save' )
+        admin1.reload
+        # Test
+        expect( admin1.profile_image_file_name ).to eq( 'test_image2.png' )
+      end
+
+      it "edits banner image" do
+        # Capybara navigation
+        visit( edit_author_path( admin1.id ) )
+        attach_file( 'Banner Image', Rails.root + 'spec/factories/images/test_image2.png' )
+        click_button( 'Save' )
+        admin1.reload
+        # Test
+        expect( admin1.banner_image_file_name ).to eq( 'test_image2.png' )
       end
 
       it "edits bio" do
