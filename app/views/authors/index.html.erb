@@ -14,8 +14,8 @@
   <%@authors.each do | author | %>
     <% if author.confirmed? %>
       <div>
-        <span>profile image</span>
-        <span>banner image</span>
+        <span><%= link_to image_tag( author.profile_image( :index_profile ), :class => "index_profile" ), author  %></span>
+        <span><%= image_tag author.banner_image( :index_banner ), class: "index_banner" %></span>
         <span><%= link_to author.username, author %></span>
         <span><%= author.email %></span>
         <% if current_author && current_author.admin? && author.id != current_author.id && !author.admin?%>
