@@ -11,3 +11,7 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Ignore dev env Paperclip uploads.
+/public/system/authors/banner_images
+/public/system/authors/profile_images
