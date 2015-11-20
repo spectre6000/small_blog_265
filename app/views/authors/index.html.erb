@@ -1,11 +1,5 @@
 <h1 class="h1">All authors</h1>
 
-<% if author_signed_in? %>
-  <span><%= link_to "sign out", destroy_author_session_path, method: :delete %></span>
-<% else %>
-  <span><%= link_to "sign in", new_author_session_path %></span>
-<% end %>
-
 <% if current_author && current_author.admin? %>
   <span> | <%= link_to 'invite new author', new_author_invitation_path %></span>
 <% end %>

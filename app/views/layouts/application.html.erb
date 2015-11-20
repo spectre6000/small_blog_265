@@ -7,8 +7,15 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <header>
+    <div id="header_logo">SMALLBLOG</div>
+    <%= render "layouts/nav" %>
+  </header>
+  
   <%= yield %>
 
+  <footer>
+    <%= render "layouts/nav" %>
+  </footer>
 </body>
 </html>
