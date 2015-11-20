@@ -1,0 +1,31 @@
+// Named colors
+$dark-brown: #48261C;
+$light-brown: #A37A60;
+$dark-teal: #455D5F;
+$light-teal: #97B1A9;
+$dark-cream: #CAB9AC;
+$light-cream: #FCE6D2;
+// Functional colors
+$main-dark: $dark-brown;
+$main-light: $light-brown;
+$contrast-dark: $dark-teal;
+$contrast-light: $light-teal;
+$background-dark: $dark-cream;
+$background-light: $light-cream;
+
+// Universal elements color scheme
+header, footer {
+  background-color: $main-dark;
+}
+
+body {
+  background-color: $background-light;
+}
+
+nav {
+  background-color: $contrast-light;
+}
+
+article {
+  background-color: $background-dark;
+}
