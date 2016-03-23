@@ -19,15 +19,16 @@ group :development, :test do
   gem 'byebug'
 
   gem 'rspec-rails', '~> 3.0'
-  gem 'factory_girl_rails', "~> 4.0"
+  gem 'factory_girl_rails', '~> 4.0'
   gem 'capybara'
   gem 'guard-rspec'
   gem 'spring-commands-rspec'
   gem 'database_cleaner'
+  gem 'rubocop'
+  gem 'guard-rubocop'
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
 end
-

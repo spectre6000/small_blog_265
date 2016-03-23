@@ -1,6 +1,5 @@
 class Users::InvitationsController < Devise::InvitationsController
-
-  before_filter :is_admin?, :only => [:new, :create]
+  before_filter :is_admin?, only: [:new, :create]
   before_filter :update_sanitized_params, only: :update
   # prepend_before_filter :authenticate_inviter!, :only => [:new, :create]
   # prepend_before_filter :has_invitations_left?, :only => [:create]
@@ -85,15 +84,15 @@ class Users::InvitationsController < Devise::InvitationsController
 
   protected
 
-    def is_admin?
-      redirect_to( root_url ) unless current_user.admin?
-    end
+  def is_admin?
+    redirect_to(root_url) unless current_user.admin?
+  end
 
-    def update_sanitized_params
-      devise_parameter_sanitizer.for(:accept_invitation) do |u|
-        u.permit(:username, :password, :password_confirmation, :invitation_token)
-      end
+  def update_sanitized_params
+    devise_parameter_sanitizer.for(:accept_invitation) do |u|
+      u.permit(:username, :password, :password_confirmation, :invitation_token)
     end
+  end
 
   # def invite_resource(&block)
   #   resource_class.invite!(invite_params, current_inviter, &block)
@@ -129,5 +128,4 @@ class Users::InvitationsController < Devise::InvitationsController
   # def update_resource_params
   #   devise_parameter_sanitizer.sanitize(:accept_invitation)
   # end
-
 end
