@@ -1,9 +1,9 @@
 <nav>
-  <%= link_to 'Authors', authors_path %>
+  <%= link_to 'Users', users_path %>
   Categories
-  <% if current_author %>
-    <%= link_to "Log out", destroy_author_session_path, method: :delete %>
+  <% if current_user %>
+    <%= link_to "Log out", destroy_user_session_path, method: :delete %>
   <% else %>
-    <%= link_to "Log in", new_author_session_path %>
+    <%= link_to "Log in", new_user_session_path %>
   <% end %>
 </nav>

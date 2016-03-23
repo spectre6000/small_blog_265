@@ -29,3 +29,21 @@ nav {
 article {
   background-color: $background-dark;
 }
+
+header {
+  height: 3em;
+
+  #header_logo {
+    @media (max-width: 500px) {
+
+      #nav-left {
+        width: 15em;
+      }
+
+        #nav-menu {
+          width: 4.75em;
+        }
+
+    }
+  }
+}

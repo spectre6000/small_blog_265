@@ -1,0 +1,116 @@
+require 'rails_helper'
+
+RSpec.feature "User index page", :type => :feature do
+
+  describe "#index" do
+
+    # RSpec test objects
+    let( :admin1 ) { create( :admin ) }
+    let!( :user1 ) { create( :user ) }
+
+    context "no user signed in" do
+
+      before( :each ) do
+        # Capybara navigation
+        visit( 'users' )
+      end
+
+      it "does not give a guest user an invitation link" do
+        # Test
+        expect( page.body ).to_not have_link( "invite new user" )
+      end
+
+      it "does not give a guest user a delete link" do
+        # Test
+        expect( page.body ).to_not have_link( "delete" )
+      end
+
+      it "does not allows a guest user to make other users admins" do
+        # Test
+        expect( page.body ).to_not have_link( "make admin" )
+      end
+
+    end
+
+    context "non-admin user signed in" do
+
+      before ( :each ) do
+        # Warden session
+        login_as( @user1 )
+      end
+
+      it "does not give a non-admin user an invitation link" do
+        # Test
+        expect( page.body ).to_not have_link( "invite new user" )
+      end
+
+      it "does not give a non-admin user a delete link" do
+        # Test
+        expect( page.body ).to_not have_link( "delete" )
+      end
+
+      it "does not allows a non-admin user to make other users admins" do
+        # Test
+        expect( page.body ).to_not have_link( "make admin" )
+      end
+
+    end
+
+    context "admin user signed in" do
+
+      before ( :each ) do
+        # Warden session
+        login_as( admin1 )
+        # Capybara navigation
+        visit( 'users' )
+      end
+
+      it "gives admin users an invitation link" do
+        # Test
+        expect( page.body ).to have_link( "invite new user" )
+      end
+
+      it "gives admin users a delete link" do
+        # Test
+        expect( page.body ).to have_link( "delete" )
+      end
+
+      it "gives admin users a make admin link" do
+        # Test
+        expect( page.find( 'div', :text => "#{ user1.username }" ) ).to have_link( "make admin" )
+      end
+
+      it "does not give an Admin a make admin link for themselves" do
+        # Test
+        expect( page.find( 'div', :text => "#{ admin1.username }" ) ).to_not have_link( "make admin" )
+      end
+
+      it "allows an Admin to make other users admins" do
+        # Capybara navigation
+        page.find( 'div', :text => "#{ user1.username }" ).click_link( 'make admin' )
+        # Refresh for test
+        user1.reload
+        # Test
+        expect( user1.admin ).to eq( true )
+      end
+      
+      it "allows an Admin to delete other users" do
+        # Test
+        expect{ page.find( 'div', :text => "#{ user1.username }" ).click_link( 'delete' ) }.to change( User, :count ).by( -1 )
+      end
+
+      it "does not give an Admin a delete link for themselves" do
+        # Test
+        expect( page.find( 'div', :text => "#{ admin1.username }" ) ).to_not have_link( "delete" )
+      end
+
+      it "does not allow an Admin to delete self manually" do
+        # Test
+        expect{ page.driver.submit( :delete, "/users/#{ admin1.id }", {} ) }.to change( User, :count ).by( 0 )
+      end
+
+    end
+
+  end
+
+end

@@ -12,7 +12,7 @@ Features:
 --Comments w/ anti-spam measure(s)
 --search
 --tags/tagging/categories
---dashboards for users and authors
+--dashboards for users/authors/admins
 --subscriptions via email/rss(?)
 --google analytics
 --sharing
