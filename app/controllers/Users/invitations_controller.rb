@@ -1,6 +1,6 @@
 class Users::InvitationsController < Devise::InvitationsController
-  before_filter :is_admin?, only: [:new, :create]
-  before_filter :update_sanitized_params, only: :update
+  before_action :is_admin?, only: [:new, :create]
+  before_action :update_sanitized_params, only: :update
   # prepend_before_filter :authenticate_inviter!, :only => [:new, :create]
   # prepend_before_filter :has_invitations_left?, :only => [:create]
   # prepend_before_filter :require_no_authentication, :only => [:edit, :update, :destroy]
