@@ -16,10 +16,14 @@ FactoryGirl.define do
     bio { username + ' was born in ' + location + '.' }
     password 'password'
     password_confirmation 'password'
-    confirmed_at { Time.now }
+    confirmed_at { Time.zone.now }
     invitation_accepted_at { Time.zone.now }
-    profile_image { File.new("#{Rails.root}/spec/factories/images/test_image1.png") }
-    banner_image { File.new("#{Rails.root}/spec/factories/images/test_image1.png") }
+    profile_image { 
+      File.new("#{Rails.root}/spec/factories/images/test_image1.png")
+    }
+    banner_image {
+      File.new("#{Rails.root}/spec/factories/images/test_image1.png")
+    }
 
     factory :admin do
       admin true

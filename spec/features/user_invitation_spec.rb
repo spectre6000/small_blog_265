@@ -13,7 +13,7 @@ RSpec.feature 'User invitations', type: :feature do
     end
 
     context 'non-admin user signed in' do
-      before (:each) do
+      before(:each) do
         login_as(user1)
       end
 
@@ -24,7 +24,7 @@ RSpec.feature 'User invitations', type: :feature do
     end
 
     context 'admin user signed in' do
-      before (:each) do
+      before(:each) do
         login_as(admin1)
       end
 
@@ -50,7 +50,9 @@ RSpec.feature 'User invitations', type: :feature do
         end
 
         it 'creates unconfirmed new user' do
-          expect { click_button('Send an invitation') }.to change(User, :count).by(1)
+          expect {
+            click_button('Send an invitation')
+          }.to change(User, :count).by(1)
         end
       end
     end

@@ -8,7 +8,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe '#index' do
     context 'no user logged in' do
-      before (:each) do
+      before(:each) do
         get(:index)
       end
 
@@ -26,7 +26,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context 'non-admin user logged in' do
-      before (:each) do
+      before(:each) do
         sign_in(user1)
         get(:index)
       end
@@ -45,7 +45,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context 'admin user logged in' do
-      before (:each) do
+      before(:each) do
         get(:index)
         sign_in(admin1)
       end
@@ -66,7 +66,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe '#show' do
     context 'no user logged in' do
-      before (:each) do
+      before(:each) do
         get(:show, id: user1.id)
       end
 
@@ -84,7 +84,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context 'non-admin user logged in' do
-      before (:each) do
+      before(:each) do
         sign_in(user1)
         get(:show, id: user1.id)
       end
@@ -103,7 +103,7 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context 'admin user logged in' do
-      before (:each) do
+      before(:each) do
         sign_in(admin1)
         get(:show, id: user1.id)
       end
@@ -125,7 +125,7 @@ RSpec.describe UsersController, type: :controller do
   describe '#edit' do
     context 'no user logged in' do
       context 'non-admin page' do
-        before (:each) do
+        before(:each) do
           get(:edit, id: user1.id)
         end
 
@@ -143,7 +143,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       context 'admin page' do
-        before (:each) do
+        before(:each) do
           get(:edit, id: admin1.id)
         end
 
@@ -162,12 +162,12 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context 'non-admin user logged in' do
-      before (:each) do
+      before(:each) do
         sign_in(user1)
       end
 
       context 'own page' do
-        before (:each) do
+        before(:each) do
           get(:edit, id: user1.id)
         end
 
@@ -185,7 +185,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       context "other non-admin user's page" do
-        before (:each) do
+        before(:each) do
           get(:edit, id: user2.id)
         end
 
@@ -203,7 +203,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       context "admin user's page" do
-        before (:each) do
+        before(:each) do
           get(:edit, id: admin1.id)
         end
 
@@ -222,12 +222,12 @@ RSpec.describe UsersController, type: :controller do
     end
 
     context 'admin user logged in' do
-      before (:each) do
+      before(:each) do
         sign_in(admin1)
       end
 
       context 'own page' do
-        before (:each) do
+        before(:each) do
           get(:edit, id: admin1.id)
         end
 
@@ -245,7 +245,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       context "other non-admin user's page" do
-        before (:each) do
+        before(:each) do
           get(:edit, id: user2.id)
         end
 
@@ -263,7 +263,7 @@ RSpec.describe UsersController, type: :controller do
       end
 
       context "other admin user's page" do
-        before (:each) do
+        before(:each) do
           get(:edit, id: admin2.id)
         end
 

@@ -24,7 +24,7 @@ RSpec.feature 'User index page', type: :feature do
     end
 
     context 'non-admin user signed in' do
-      before (:each) do
+      before(:each) do
         login_as(@user1)
       end
 
@@ -42,7 +42,7 @@ RSpec.feature 'User index page', type: :feature do
     end
 
     context 'admin user signed in' do
-      before (:each) do
+      before(:each) do
         login_as(admin1)
         visit('users')
       end
@@ -56,11 +56,15 @@ RSpec.feature 'User index page', type: :feature do
       end
 
       it 'gives admin users a make admin link' do
-        expect(page.find('div', text: user1.username.to_s)).to have_link('make admin')
+        expect(
+          page.find('div', text: user1.username.to_s)
+        ).to have_link('make admin')
       end
 
       it 'does not give an Admin a make admin link for themselves' do
-        expect(page.find('div', text: admin1.username.to_s)).to_not have_link('make admin')
+        expect(
+          page.find('div', text: admin1.username.to_s)
+        ).to_not have_link('make admin')
       end
 
       it 'allows an Admin to make other users admins' do
@@ -70,15 +74,21 @@ RSpec.feature 'User index page', type: :feature do
       end
 
       it 'allows an Admin to delete other users' do
-        expect { page.find('div', text: user1.username.to_s).click_link('delete') }.to change(User, :count).by(-1)
+        expect { 
+          page.find('div', text: user1.username.to_s).click_link('delete') 
+        }.to change(User, :count).by(-1)
       end
 
       it 'does not give an Admin a delete link for themselves' do
-        expect(page.find('div', text: admin1.username.to_s)).to_not have_link('delete')
+        expect(
+          page.find('div', text: admin1.username.to_s)
+        ).to_not have_link('delete')
       end
 
       it 'does not allow an Admin to delete self manually' do
-        expect { page.driver.submit(:delete, "/users/#{admin1.id}", {}) }.to change(User, :count).by(0)
+        expect {
+          page.driver.submit(:delete, "/users/#{admin1.id}", {})
+        }.to change(User, :count).by(0)
       end
     end
   end

@@ -17,6 +17,8 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_in_params
-    devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:username, :password, :remember_me) }
+    devise_parameter_sanitizer.for(:sign_in) do |u|
+      u.permit(:username, :password, :remember_me)
+    end
   end
 end
