@@ -1,0 +1,6 @@
+<% @articles.each do |article| %>
+  <%= article.title %>
+  <%= article.release_date %>
+  <%= article.user.username %>
+  <%= article.body %>
+<% end %>

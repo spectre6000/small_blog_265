@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
     patch '/toggle-admin', to: 'users#toggle_admin'
   end
+
+  resources :articles
 end

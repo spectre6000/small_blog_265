@@ -1,9 +1,8 @@
-<h1>USERS SHOW</h1>
+<div class="profile-header">
+  <%= image_tag @user.profile_image, :class => "profile-image" %><br>
+  <%= image_tag @user.banner_image, :class => "banner-image" %><br>
+</div>
 
-<%= link_to "index", users_path %><br>
-
-<%= image_tag @user.profile_image %><br>
-<%= image_tag @user.banner_image %><br>
 <article>
   <p>username: <%= @user.username %></p>
   <p>email: <%= @user.email %></p>
