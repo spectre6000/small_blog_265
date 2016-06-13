@@ -1,9 +1,11 @@
-<nav class="row">>
-  <%= link_to 'Users', users_path%>
-  Categories
+<nav class="col-md-8 col-sm-12">
+  <%= link_to 'Users', users_path, class: "col-md-2 col-md-offset-6 col-sm-4"%>
+  <div class="col-md-2 col-sm-4 test">
+      Categories
+  </div>
   <% if current_user %>
-    <%= link_to "Log out", destroy_user_session_path, method: :delete %>
+    <%= link_to "Log out", destroy_user_session_path, class: "col-md-2 col-sm-4", method: :delete %>
   <% else %>
-    <%= link_to "Log in", new_user_session_path %>
+    <%= link_to "Log in", new_user_session_path, class: "col-md-2 col-sm-4" %>
   <% end %>
 </nav>

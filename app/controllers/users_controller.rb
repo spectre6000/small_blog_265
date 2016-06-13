@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
   def index
-    @users = User.paginate(page: params[:page], per_page: 10)
+    @users = User.confirmed_users.paginate(page: params[:page], per_page: 10)
   end
 
   def show

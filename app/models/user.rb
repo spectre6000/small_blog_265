@@ -26,4 +26,6 @@ class User < ActiveRecord::Base
   validates_attachment_content_type :banner_image, 
                                     content_type: %r{\Aimage\/.*\Z}
   has_many :articles
+
+  scope :confirmed_users, -> {User.where.not(confirmed_at: nil)}
 end
