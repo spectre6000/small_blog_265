@@ -4,6 +4,4 @@ Rails:
 AllCops:
   Exclude:
     - '**/Rakefile'
-    - 'bin/rails'
-    - 'bin/rake'
-    - 'bin/rspec'
+    - 'bin/**'

@@ -16,7 +16,7 @@ RSpec.describe User, type: :model do
   end
 
   it 'returns confirmed users with the confirmed_users scope' do
-    unconfirmed = create(:user, confirmed_at: nil)
+    create(:user, confirmed_at: nil)
     confirmed = create(:user)
 
     expect(User.confirmed_users).to match_array([confirmed])
