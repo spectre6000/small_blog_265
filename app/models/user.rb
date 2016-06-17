@@ -1,3 +1,4 @@
+# Model for Authors/Commentors
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :timeoutable and :omniauthable

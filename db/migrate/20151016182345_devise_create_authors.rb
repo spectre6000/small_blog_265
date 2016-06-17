@@ -1,3 +1,4 @@
+# Add Devise
 class DeviseCreateAuthors < ActiveRecord::Migration
   def change
     create_table(:authors) do |t|

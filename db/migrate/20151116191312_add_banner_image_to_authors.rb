@@ -1,3 +1,4 @@
+# Add column for author banner images
 class AddBannerImageToAuthors < ActiveRecord::Migration
   def up
     add_attachment :authors, :banner_image

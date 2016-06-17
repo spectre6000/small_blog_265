@@ -1,3 +1,4 @@
+# Add column for profile images
 class AddAttachmentProfileImageToAuthors < ActiveRecord::Migration
   def up
     add_attachment :authors, :profile_image

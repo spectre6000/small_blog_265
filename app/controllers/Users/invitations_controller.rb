@@ -1,3 +1,4 @@
+# Devise Invitable controller
 class Users::InvitationsController < Devise::InvitationsController
   before_action :non_admin_to_root, only: [:new, :create]
   before_action :update_sanitized_params, only: :update

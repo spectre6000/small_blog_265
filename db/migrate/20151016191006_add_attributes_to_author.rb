@@ -1,3 +1,4 @@
+# add additional information to author class
 class AddAttributesToAuthor < ActiveRecord::Migration
   def change
     change_table :authors do |t|

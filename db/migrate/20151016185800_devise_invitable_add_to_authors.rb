@@ -1,3 +1,4 @@
+# Add devise_invitable
 class DeviseInvitableAddToAuthors < ActiveRecord::Migration
   def up
     change_table :authors do |t|

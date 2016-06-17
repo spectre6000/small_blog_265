@@ -1,3 +1,4 @@
+# Controller for Users (authors and commentors)
 class UsersController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
 
