@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-
   def index
     @articles = Article.all
   end
@@ -18,5 +17,4 @@ class ArticlesController < ApplicationController
 
   def destroy
   end
-
 end

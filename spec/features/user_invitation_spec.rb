@@ -50,9 +50,9 @@ RSpec.feature 'User invitations', type: :feature do
         end
 
         it 'creates unconfirmed new user' do
-          expect {
+          expect do
             click_button('Send an invitation')
-          }.to change(User, :count).by(1)
+          end.to change(User, :count).by(1)
         end
       end
     end

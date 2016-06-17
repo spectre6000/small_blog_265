@@ -18,12 +18,12 @@ FactoryGirl.define do
     password_confirmation 'password'
     confirmed_at { Time.zone.now }
     invitation_accepted_at { Time.zone.now }
-    profile_image { 
+    profile_image do
       File.new("#{Rails.root}/spec/factories/images/test_image1.png")
-    }
-    banner_image {
+    end
+    banner_image do
       File.new("#{Rails.root}/spec/factories/images/test_image1.png")
-    }
+    end
 
     factory :admin do
       admin true

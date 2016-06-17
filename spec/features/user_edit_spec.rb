@@ -37,7 +37,7 @@ RSpec.feature 'Editing user profiles', type: :feature do
 
       it 'edits profile image' do
         visit(edit_user_path(user1.id))
-        attach_file('Profile Image', 
+        attach_file('Profile Image',
                     Rails.root + 'spec/factories/images/test_image2.png')
         click_button('Save')
         user1.reload
@@ -46,7 +46,7 @@ RSpec.feature 'Editing user profiles', type: :feature do
 
       it 'edits banner image' do
         visit(edit_user_path(user1.id))
-        attach_file('Banner Image', 
+        attach_file('Banner Image',
                     Rails.root + 'spec/factories/images/test_image2.png')
         click_button('Save')
         user1.reload
@@ -89,7 +89,7 @@ RSpec.feature 'Editing user profiles', type: :feature do
 
       it 'edits profile image' do
         visit(edit_user_path(admin1.id))
-        attach_file('Profile Image', 
+        attach_file('Profile Image',
                     Rails.root + 'spec/factories/images/test_image2.png')
         click_button('Save')
         admin1.reload
@@ -98,7 +98,7 @@ RSpec.feature 'Editing user profiles', type: :feature do
 
       it 'edits banner image' do
         visit(edit_user_path(admin1.id))
-        attach_file('Banner Image', 
+        attach_file('Banner Image',
                     Rails.root + 'spec/factories/images/test_image2.png')
         click_button('Save')
         admin1.reload

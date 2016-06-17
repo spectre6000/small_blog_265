@@ -16,7 +16,7 @@ class Users::InvitationsController < Devise::InvitationsController
       end
       format.html do
         super
-      end 
+      end
     end
   end
 
@@ -34,8 +34,8 @@ class Users::InvitationsController < Devise::InvitationsController
 
   def invitation_token
     Devise.token_generator.digest(
-      resource_class, 
-      :invitation_token, 
+      resource_class,
+      :invitation_token,
       update_resource_params[:invitation_token]
     )
   end
@@ -44,7 +44,7 @@ class Users::InvitationsController < Devise::InvitationsController
     invitation_token
     self.resource = assign_resource
     resource.skip_password = true
-    resource.update_attributes 
+    resource.update_attributes
     resource.update_resource_params.except(:invitation_token)
   end
 

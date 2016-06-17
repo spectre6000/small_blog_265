@@ -74,9 +74,9 @@ RSpec.feature 'User index page', type: :feature do
       end
 
       it 'allows an Admin to delete other users' do
-        expect { 
-          page.find('div', text: user1.username.to_s).click_link('delete') 
-        }.to change(User, :count).by(-1)
+        expect do
+          page.find('div', text: user1.username.to_s).click_link('delete')
+        end.to change(User, :count).by(-1)
       end
 
       it 'does not give an Admin a delete link for themselves' do
@@ -86,9 +86,9 @@ RSpec.feature 'User index page', type: :feature do
       end
 
       it 'does not allow an Admin to delete self manually' do
-        expect {
+        expect do
           page.driver.submit(:delete, "/users/#{admin1.id}", {})
-        }.to change(User, :count).by(0)
+        end.to change(User, :count).by(0)
       end
     end
   end
