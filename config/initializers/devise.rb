@@ -7,13 +7,15 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` on Rails 4+ applications as its
   # `secret_key` by default. You can change it below and use your own secret
   # key.
-  # config.secret_key = 'a7d87bec53907d8cdbb061e7ec165e546d273d4a7240dae519b04010ef5dc8218772ca6be7d60589557b656a341a6f3adbc2c5ce255f8604ca20c8cab2cb3e63'
+  # config.secret_key = 'a7d87bec53907d8cdbb061e7ec165e546d273d4a7240dae519b0' \
+  # '4010ef5dc8218772ca6be7d60589557b656a341a6f3adbc2c5ce255f8604ca20c8cab2cb' \
+  # '3e63'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'mailer@smallblog.com'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -107,7 +109,8 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = '653215fabbbc409da4ac11e0805eb568b9788f866986e414f8b1e71dd0a43e67e7b52a3b72250b7908faabd3edb60b4ac16317ea179b5881c786e1a734239fb1'
+  # config.pepper = '653215fabbbc409da4ac11e0805eb568b9788f866986e414f8b1e71d' \
+  # 'd0a43e67e7b52a3b72250b7908faabd3edb60b4ac16317ea179b5881c786e1a734239fb1'
 
   # ==> Configuration for :invitable
   # The period the generated invitation token is valid, after

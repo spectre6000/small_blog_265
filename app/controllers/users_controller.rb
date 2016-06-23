@@ -30,12 +30,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if User.find(params[:id]).id != current_user.id
-      User.find(params[:id]).destroy
-      flash[:success] = 'User deleted.'
-    else
-      flash[:danger] = "You can't delete yourself."
-    end
+    delete_non_self_user
     redirect_to users_url
   end
 
@@ -61,5 +56,15 @@ class UsersController < ApplicationController
   # Confirms an admin user.
   def admin_user
     redirect_to(root_url) unless current_user.admin?
+  end
+
+  # Deletes user if not self
+  def delete_non_self_user
+    if User.find(params[:id]).id != current_user.id
+      User.find(params[:id]).destroy
+      flash[:success] = 'User deleted.'
+    else
+      flash[:danger] = "You can't delete yourself."
+    end
   end
 end
